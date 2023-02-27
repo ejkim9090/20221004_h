@@ -3,13 +3,16 @@ package kh.spring.s02.board.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kh.spring.s02.board.model.service.BoardService;
 import kh.spring.s02.board.model.vo.BoardVo;
 
 @Controller
@@ -17,6 +20,13 @@ import kh.spring.s02.board.model.vo.BoardVo;
 @RequestMapping("/board")
 public class BoardController {
 	
+	@Autowired
+	private BoardService service;
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void viewListBoard( Model model) {
+		model.addAttribute("boardlist", service.selectList());
+	}
 	
 //	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
