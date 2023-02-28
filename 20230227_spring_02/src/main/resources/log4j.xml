@@ -9,12 +9,11 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-	
+<!-- file에 저장하기 -->
 	<!-- Application Loggers -->
 	<logger name="kh.spring.s02">
 		<level value="info" />
 	</logger>
-	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -34,8 +33,27 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="trace" />
 		<appender-ref ref="console" />
 	</root>
+	<!-- 
+	fatal
+	error
+	warn
+	info
+	debug
+	trace
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 -->
 </log4j:configuration>
