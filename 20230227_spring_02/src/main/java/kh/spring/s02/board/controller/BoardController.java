@@ -25,6 +25,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void viewListBoard( Model model) {
+		System.out.println("board list controller!!!!");
 		model.addAttribute("boardlist", service.selectList());
 	}
 	
