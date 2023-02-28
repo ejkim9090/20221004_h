@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import kh.spring.s02.board.model.vo.BoardVo;
@@ -11,31 +12,31 @@ import kh.spring.s02.board.model.vo.BoardVo;
 @Repository
 public class BoardDao {
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession aa;
 	
 	public int insert(BoardVo vo) {
-		return sqlSession.insert("boardns.insertid", vo);		
+		return aa.insert("boardns.insertid", vo);		
 	}
 	public int update(BoardVo vo) {
-		return sqlSession.update("boardns.updateid", vo);		
+		return aa.update("boardns.updateid", vo);		
 	}
 	public int updateReadCount(int boardNum) {
-		return sqlSession.update("boardns.updateReadCount", boardNum);		
+		return aa.update("boardns.updateReadCount", boardNum);		
 	}
 	public int updateForReply(int boardNum) {
-		return sqlSession.update("boardns.updateForReply", boardNum);		
+		return aa.update("boardns.updateForReply", boardNum);		
 	}
 	public int delete(int boardNum  /* BoardVo vo 또는 PK 또는 List<PK>*/) {
-		return sqlSession.delete("boardns.insertid", boardNum);		
+		return aa.delete("boardns.insertid", boardNum);		
 	}
 	public BoardVo selectOne(int boardNum /* PK */) {
-		return sqlSession.selectOne("boardns.selectOneid", boardNum);		
+		return aa.selectOne("boardns.selectOneid", boardNum);		
 	}
 	public List<BoardVo> selectList() {
-		return sqlSession.selectList("boardns.selectListid");		
+		return aa.selectList("boardns.selectListid");		
 	}
 	public int selectOneCount() {
-		return sqlSession.selectOne("boardns.selectOneCount");
+		return aa.selectOne("boardns.selectOneCount");
 	}
 	
 	/*
