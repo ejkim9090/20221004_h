@@ -27,7 +27,7 @@ public class BoardDao {
 		return aa.update("boardns.updateForReply", boardNum);		
 	}
 	public int delete(int boardNum  /* BoardVo vo 또는 PK 또는 List<PK>*/) {
-		return aa.delete("boardns.insertid", boardNum);		
+		return aa.delete("boardns.deleteid", boardNum);		
 	}
 	public BoardVo selectOne(int boardNum /* PK */) {
 		return aa.selectOne("boardns.selectOneid", boardNum);		
