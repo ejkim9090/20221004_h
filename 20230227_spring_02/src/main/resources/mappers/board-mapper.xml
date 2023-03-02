@@ -2,6 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardns">
 
+<resultMap type="bvo" id="bvoMap">
+ 	<id column="board_Num" property="boardNum"/>
+	<result column="board_Title" property="boardTitle"/>
+	<result column="board_Writer" property="boardWriter"/>
+	<result column="board_Content" property="boardContent"/>
+	<result column="board_Original_Filename" property="boardOriginalFilename"/>
+	<result column="board_Rename_Filename" property="boardRenameFilename"/>
+	<result column="board_Date" property="boardDate"/>
+	<result column="board_Level" property="boardLevel"/>
+	<result column="board_Ref" property="boardRef"/>
+	<result column="board_Reply_Seq" property="boardReplySeq"/>
+	<result column="board_Readcount" property="boardReadcount"/>
+</resultMap>
+
+<resultMap type="bvo" id="rsMap" >
+	<result column="sdate" property="boardDate"/>
+	<result column="board_num" property="boardRef"/>
+</resultMap>
+
+<!--  resultType="bvo" -->
+<select id="tempSelect" resultMap="rsMap">
+	select sysdate as sdate, board_num from board
+</select>
+
+
 <insert id="insertid" parameterType="kh.spring.s02.board.model.vo.BoardVo">
 	insert into board values
 	(
@@ -63,10 +88,12 @@
 <delete id="deleteid">
 	delete from board where board_Num = #{boardNum}
 </delete>
+<!-- <select id="selectOneid" resultMap="bvoMap"> -->
 <select id="selectOneid" resultType="kh.spring.s02.board.model.vo.BoardVo">
 	select * from board where board_Num = #{boardNum}
 </select>
-<select id="selectListid" resultType="kh.spring.s02.board.model.vo.BoardVo">
+<!-- <select id="selectListid" resultMap="bvoMap"> -->
+<select id="selectListid" resultType="bvo">
 select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT 
                             , BOARD_ORIGINAL_FILENAME, BOARD_RENAME_FILENAME,BOARD_DATE 
                             , BOARD_LEVEL, BOARD_REF, BOARD_REPLY_SEQ,BOARD_READCOUNT 
@@ -81,4 +108,32 @@ select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT
 	select * from board
 </select>
  -->
+ 
+<select id="tempCallableSelect" 
+		statementType="CALLABLE"
+		parameterType="bvo" resultType="bvo">
+{	CALL p1   }
+</select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 </mapper>

@@ -1,11 +1,13 @@
 package kh.spring.s02.board.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoardVo {
+public class BoardVo implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int boardNum;
 	private String boardTitle;
 	private String boardWriter;
