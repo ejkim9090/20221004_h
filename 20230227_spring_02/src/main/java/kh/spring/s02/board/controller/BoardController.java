@@ -31,11 +31,29 @@ public class BoardController {
 		return mv;
 	}
 	
-//	@RequestMapping(value = "/board/update", method = RequestMethod.GET)
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@GetMapping("/update")
 	public void viewUpdateBoard() {
 		
 	}
+//	@PostMapping("/update")
+	@GetMapping("/updatePostTest")
+	public void updateBoard() {
+		// TODO
+		int boardNum = 1;
+		String boardTitle = "수정제목";
+		String boardContent = "수정내용";
+		String boardOriginalFilename = "";  // "" 파일없음
+		String boardRenameFilename = "";  // "" 파일없음
+		
+		BoardVo vo = new BoardVo();
+		vo.setBoardTitle(boardTitle);
+		vo.setBoardContent(boardContent);
+		vo.setBoardOriginalFilename(boardOriginalFilename);
+		vo.setBoardRenameFilename(boardRenameFilename);
+		int result = service.update(vo);
+		
+	}
+	
 	
 	@GetMapping("/delete")
 	public void viewDeleteBoard() {
@@ -52,6 +70,7 @@ public class BoardController {
 		BoardVo vo = service.selectOne(boardNum, writer);
 	}
 	
+	// 원글 작성페이지 이동
 	@GetMapping("/insert")
 	public ModelAndView viewInsertBoard(
 			ModelAndView mv
@@ -63,6 +82,7 @@ public class BoardController {
 		return mv;
 	}
 	
+	// 원글 작성 
 //	@PostMapping("/insert")
 	// TODO
 	@GetMapping("/insertPostTest")
@@ -73,6 +93,33 @@ public class BoardController {
 		vo.setBoardTitle("임시제목");
 		vo.setBoardWriter("user22");
 		int result = service.insert(vo);
+		return mv;
+	}
+	
+	// 답글작성 페이지이동
+	@GetMapping("/insertReply")
+	public ModelAndView viewInsertReply(ModelAndView mv
+			, int boardNum // 몇번글에 답글인지 
+			) {
+		mv.setViewName("insertReply");
+		return mv;
+	}
+	// 답글작성
+//	TODO
+//	@PostMapping("/insertReply")
+	@GetMapping("/insertReplyPostTest")
+	public ModelAndView viewInsertReply(ModelAndView mv
+			, BoardVo vo
+		) {
+		// TODO
+		int boardNum = 6;
+		vo.setBoardNum(boardNum);
+		
+		vo.setBoardContent("임시6답내용");
+		vo.setBoardTitle("임시6답제목");
+		vo.setBoardWriter("user22");
+		
+		service.insert(vo);
 		
 		return mv;
 	}

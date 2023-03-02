@@ -24,6 +24,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int insert(BoardVo vo) {
+		if(vo.getBoardNum() != 0) {
+			// 답글   (원글은 0)
+			dao.updateForReply(vo.getBoardNum());
+		}		
 		return dao.insert(vo);
 	}
 

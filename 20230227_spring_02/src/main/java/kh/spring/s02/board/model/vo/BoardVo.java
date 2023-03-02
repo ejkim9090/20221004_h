@@ -13,9 +13,9 @@ public class BoardVo {
 	private String boardOriginalFilename;
 	private String boardRenameFilename;
 	private Date boardDate;
-	private int boardLevel;
-	private int boardRef;
-	private int boardReplySeq;
+	private int boardLevel;  // 
+	private int boardRef;  //
+	private int boardReplySeq;  // 
 	private int boardReadcount;
 	@Override
 	public String toString() {

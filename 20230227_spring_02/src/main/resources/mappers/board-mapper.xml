@@ -12,9 +12,18 @@
 		, #{boardOriginalFilename}
 		, #{boardRenameFilename}
 		, default
+	<choose>
+		<when test="boardNum != 0">
+    , (select board_level+1 from board where board_num=#{boardNum})
+    , (select BOARD_REF from board where board_num = #{boardNum})
+    , (select BOARD_REPLY_SEQ+1 from board where board_num=#{boardNum})
+		</when>
+		<otherwise>
 		, DEFAULT 
 		, (select NVL(MAX(BOARD_NUM), 0)+1 from board)
 		, DEFAULT
+		</otherwise>
+	</choose>
 		, DEFAULT
 	)
 </insert>
@@ -22,8 +31,21 @@
 	update board set
 		board_Title = #{boardTitle}
 		, board_Content = #{boardContent}
+		<if test="boardOriginalFilename != null and boardOriginalFilename neq ''.toString() ">
 		, board_Original_Filename = #{boardOriginalFilename}
-		, board_Rename_Filename = #{boardRenameFilename}
+		</if>
+		<if test="boardOriginalFilename == null or boardOriginalFilename eq '' ">
+		, board_Original_Filename = null
+		</if>
+		, board_Rename_Filename = 
+		<choose>
+			<when test="boardRenameFilename != null and !boardRenameFilename.equals('')">
+			#{boardRenameFilename}
+			</when>
+			<otherwise>
+			null
+			</otherwise>
+		</choose>
 		, board_Date = SYSDATE
 		where board_Num = #{boardNum}
 </update>
