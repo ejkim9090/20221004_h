@@ -98,10 +98,22 @@ select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT
                             , BOARD_ORIGINAL_FILENAME, BOARD_RENAME_FILENAME,BOARD_DATE 
                             , BOARD_LEVEL, BOARD_REF, BOARD_REPLY_SEQ,BOARD_READCOUNT 
                 from board 
+		<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="searchWord != null and searchWord neq ''">
+			title like #{searchWord}
+			or content like #{searchWord}
+		</if>
+		</trim>
                 order by board_ref desc, board_reply_seq asc
 </select>
 <select id="selectOneCount" resultType="_int">
 	select count(*) cnt from board
+		<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="searchWord != null and searchWord neq ''">
+			title like #{searchWord}
+			or content like #{searchWord}
+		</if>
+		</trim>
 </select>
 <!-- 
 <select id="selectListid2">
@@ -115,12 +127,27 @@ select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT
 {	CALL p1   }
 </select>
  
+<select id="tempTrimSelect">
+	select * from board
+		<trim prefix="where" prefixOverrides="AND|OR">
+		<if test="searchWord != null and searchWord neq ''">
+			title like #{searchWord}
+			or content like #{searchWord}
+		</if>
+		</trim>
+</select>
+
+
  
- 
- 
- 
- 
- 
+<delete id="tempForeachDelete">
+	delete from board
+	<where>
+		1<>1 or
+		<foreach collection="list" item="bnum" open="board_num in (" close=")" separator=",">
+		#{bnum}
+		</foreach>
+	</where>
+</delete> 
  
  
  
