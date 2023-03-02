@@ -67,9 +67,13 @@
 	select * from board where board_Num = #{boardNum}
 </select>
 <select id="selectListid" resultType="kh.spring.s02.board.model.vo.BoardVo">
-	select * from board
+select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT 
+                            , BOARD_ORIGINAL_FILENAME, BOARD_RENAME_FILENAME,BOARD_DATE 
+                            , BOARD_LEVEL, BOARD_REF, BOARD_REPLY_SEQ,BOARD_READCOUNT 
+                from board 
+                order by board_ref desc, board_reply_seq asc
 </select>
-<select id="selectOneCount" resultType="string">
+<select id="selectOneCount" resultType="_int">
 	select count(*) cnt from board
 </select>
 <!-- 

@@ -1,5 +1,8 @@
 package kh.spring.s02.board.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,10 +26,35 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	private final static int BOARD_LIMIT = 5; 
+	private final static int PAGE_LIMIT = 3;
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView viewListBoard( ModelAndView mv) {
-		System.out.println("board list controller!!!!");
-		mv.addObject("boardlist", service.selectList());
+		// TODO
+		int currentPage = 2;
+		int totalCnt = service.selectOneCount();
+		int totalPage = (totalCnt%BOARD_LIMIT==0)?
+				(totalCnt/BOARD_LIMIT) : 
+				(totalCnt/BOARD_LIMIT) + 1;
+		int startPage = (currentPage%PAGE_LIMIT==0) ?
+				(currentPage/PAGE_LIMIT -1)*PAGE_LIMIT + 1 :
+				(currentPage/PAGE_LIMIT   )*PAGE_LIMIT + 1;
+		int endPage = (startPage + PAGE_LIMIT > totalPage) ?
+				totalPage : 
+				(startPage + PAGE_LIMIT);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("totalPage", totalPage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		map.put("currentPage", currentPage);
+		mv.addObject("pageInfo", map);
+		
+//		mv.addObject("totalPage", totalPage);
+//		mv.addObject("startPage", startPage);
+//		mv.addObject("endPage", endPage);
+//		mv.addObject("currentPage", currentPage);
+		mv.addObject("boardlist", service.selectList(currentPage, BOARD_LIMIT));
 		mv.setViewName("board/list");
 		return mv;
 	}

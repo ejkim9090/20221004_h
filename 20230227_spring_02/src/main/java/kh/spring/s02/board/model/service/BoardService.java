@@ -11,6 +11,7 @@ public interface BoardService {
 	public int delete(int boardNum  /* BoardVo vo 또는 PK 또는 List<PK>*/) ;
 	public BoardVo selectOne(int boardNum, String writer /* PK */) ;
 //	public int updateReadCount(int boardNum);
-	public List<BoardVo> selectList();
+	public List<BoardVo> selectList();  // 전체읽기
+	public List<BoardVo> selectList(int currentPage, int limit);  // paging처리하여 읽기
 	public int selectOneCount();
 }
