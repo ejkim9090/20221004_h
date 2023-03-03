@@ -1,5 +1,6 @@
 package kh.spring.s02.board.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,14 +30,25 @@ public class BoardController {
 	private final static int BOARD_LIMIT = 5; 
 	private final static int PAGE_LIMIT = 3;
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView viewListBoard( ModelAndView mv) {
+	@RequestMapping(value = "/list")
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView viewListBoard( ModelAndView mv, HttpServletRequest req) {
 		// TODO
 		// 검색단어는 제목,내용,작성자에서 포함되어있으면 찾기
 		// null 또는 "" 은 검색하지 않음.
 //		String searchWord = null;  
 //		String searchWord = "";  
 		String searchWord = "답";
+
+		try {
+			req.setCharacterEncoding("UTF-8");
+			searchWord = req.getParameter("searchWord");
+			System.out.println("한글 확인: "+ searchWord);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		// TODO
 		int currentPage = 2;
