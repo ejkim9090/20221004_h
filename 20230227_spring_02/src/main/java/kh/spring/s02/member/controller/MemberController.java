@@ -2,6 +2,8 @@ package kh.spring.s02.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,32 +22,32 @@ public class MemberController {
 
 	@GetMapping("/signUp")
 	public ModelAndView viewInsert(ModelAndView mv) {
-//		mv.setViewName("member/signUp");
+		mv.setViewName("member/signUp");
 		return mv;
 	}
-//	@PostMapping("/signUp")
-//	TODO
-	@GetMapping("/testSignUp")
-	public ModelAndView insert(ModelAndView mv			, MemberVo vo) {
-		vo.setEmail("emailddd");
-		vo.setId("idddd");
-		vo.setName("nameddd");
-		vo.setPasswd("passwddd");
+	@PostMapping("/signUp")
+	public ModelAndView insert(ModelAndView mv
+			, MemberVo vo) {
 		int result = service.insert(vo);
-		// TODO
+		if(result > 0) {
+			mv.setViewName("redirect:/");
+		} else {
+			mv.setViewName("redirect:/member/signUp");
+		}
 		return mv;
 	}
 	@GetMapping("/update")
-	public ModelAndView viewUpdate(ModelAndView mv) {
+	public ModelAndView viewUpdate(ModelAndView mv
+			, String id
+			) {
+		MemberVo vo = service.selectOne(id);
+		mv.addObject("membervo", vo);
+		mv.setViewName("/member/update");
 		return mv;
 	}
-//	@PostMapping("/update")
-//	TODO
-	@GetMapping("/testUpdate")
-	public ModelAndView update(ModelAndView mv			, MemberVo vo) {
-		vo.setEmail("user3333@s.s");
-		vo.setPasswd("user333");
-		vo.setId("user3");
+	@PostMapping("/update")
+	public ModelAndView update(ModelAndView mv	
+			, MemberVo vo) {
 		service.update(vo);
 		return mv;
 	}
@@ -57,9 +59,15 @@ public class MemberController {
 		return mv;
 	}
 	@GetMapping("/info")
-	public ModelAndView selectOne(ModelAndView mv			) {
-//		TODO
-		String id = "user3";
+	public ModelAndView selectOne(ModelAndView mv
+			, String id   // request.getParameter("id")  
+			// url " /member/info?id=user3
+			// url " /member/info/user3
+			) {
+		if(id == null) {
+			mv.setViewName("redirect:/");
+			return mv;
+		}
 		MemberVo result = service.selectOne(id);
 		return mv;
 	}
