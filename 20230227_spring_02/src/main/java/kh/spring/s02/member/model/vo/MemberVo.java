@@ -14,6 +14,7 @@ public class MemberVo {
 	private String passwd;
 	private String name;
 	private String email;
+	private String aaa;
 	
 	public MemberVo() {
 		super();

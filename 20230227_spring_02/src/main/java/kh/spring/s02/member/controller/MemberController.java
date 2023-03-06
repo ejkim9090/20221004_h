@@ -27,12 +27,17 @@ public class MemberController {
 	}
 	@PostMapping("/signUp")
 	public ModelAndView insert(ModelAndView mv
-			, MemberVo vo) {
+			, MemberVo vo
+			, String bbb			
+			, String id			
+			) {
 		int result = service.insert(vo);
 		if(result > 0) {
-			mv.setViewName("redirect:/");
+			// 회원가입성공
+			mv.setViewName("redirect:/?msg=회원가입성공");
 		} else {
-			mv.setViewName("redirect:/member/signUp");
+			// 회원가입실패
+			mv.setViewName("redirect:/member/signUp?msg=회원가입실패");
 		}
 		return mv;
 	}

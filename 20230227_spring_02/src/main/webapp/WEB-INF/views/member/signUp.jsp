@@ -12,6 +12,7 @@
 	<input type="password" name="passwd" placeholder="pass"><br>
 	<input type="text" name="name" placeholder="name"><br>
 	<input type="text" name="email" placeholder="email"><br>
+	<input name="bbb" value="아무거나" type="text" placeholder="bbb"><br>
 	<button type="submit">제출</button>
 </form>
 </body>
