@@ -31,7 +31,12 @@ public class MemberController {
 			, String id
 			, RedirectAttributes rttr
 			) {
-		int result = service.insert(vo);
+		int result = -1;
+		try {
+			result = service.insert(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if(result > 0) {
 			// 회원가입성공
 //			 방법 1  - 사용불가방법

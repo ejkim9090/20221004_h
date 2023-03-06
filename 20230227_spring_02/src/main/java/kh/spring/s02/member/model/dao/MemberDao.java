@@ -15,12 +15,12 @@ public class MemberDao {
 	
 	public int insert(MemberVo vo) throws Exception {
 		int result = -1;
-		try {
+//		try {
 			result = sqlSession.insert("memberMapper.insertId", vo);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		return result;
 	}
 	public int update(MemberVo vo) {
