@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Handles requests for the application home page.
@@ -29,12 +30,12 @@ public class HomeController {
 	public String home(Locale locale
 			, Model model
 			, HttpSession session
-			, HttpServletRequest req			
+//			, HttpServletRequest req	
 			) {
-		String msg = req.getParameter("msg");
-		System.out.println(msg);
-		model.addAttribute("alertMsg", msg);
-		
+//		String msg = req.getParameter("msg");
+//		System.out.println(msg);
+//		model.addAttribute("alertMsg", msg);
+
 //		logger.fatal("error Welcome home! The client locale is {}.", locale);
 		logger.error("error Welcome home! The client locale is {}.", locale);
 		logger.warn("warn Welcome home! The client locale is {}.", locale);

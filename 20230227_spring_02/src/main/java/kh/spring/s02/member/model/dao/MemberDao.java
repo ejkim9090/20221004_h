@@ -13,8 +13,15 @@ public class MemberDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int insert(MemberVo vo) {
-		return sqlSession.insert("memberMapper.insertId", vo);
+	public int insert(MemberVo vo) throws Exception {
+		int result = -1;
+		try {
+			result = sqlSession.insert("memberMapper.insertId", vo);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	public int update(MemberVo vo) {
 		return sqlSession.update("memberMapper.updateId", vo);

@@ -2,14 +2,13 @@ package kh.spring.s02.member.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.spring.s02.member.model.service.MemberService;
 import kh.spring.s02.member.model.vo.MemberVo;
@@ -29,15 +28,25 @@ public class MemberController {
 	public ModelAndView insert(ModelAndView mv
 			, MemberVo vo
 			, String bbb			
-			, String id			
+			, String id
+			, RedirectAttributes rttr
 			) {
 		int result = service.insert(vo);
 		if(result > 0) {
 			// 회원가입성공
-			mv.setViewName("redirect:/?msg=회원가입성공");
+//			 방법 1  - 사용불가방법
+//			mv.setViewName("redirect:/?msg=회원가입성공");
+//			// 방법 2
+//			mv.addObject("msg", "회원가입성공");
+//			mv.setViewName("error/errorFailure");
+			// 방법 3 - Spring에서만
+			rttr.addFlashAttribute("msg", "회원가입성공2");
+			mv.setViewName("redirect:/");
 		} else {
 			// 회원가입실패
-			mv.setViewName("redirect:/member/signUp?msg=회원가입실패");
+			// 방법 3 - Spring에서만
+			rttr.addFlashAttribute("msg", "회원가입실패");
+			mv.setViewName("redirect:/member/signUp");
 		}
 		return mv;
 	}
