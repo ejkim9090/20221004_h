@@ -1,11 +1,8 @@
 package kh.spring.s02.common;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,6 @@ import org.springframework.util.StopWatch;
 public class AdviceLog {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdviceLog.class);
-	
 	
 	// * 1개이상이 존재함. 
 	// .. 0개이상이 존재
@@ -40,7 +36,7 @@ public class AdviceLog {
 		
 		Object[] args = pjp.getArgs();
 		for(int i=0; i<args.length; i++) {
-			logger.info("▶args["+i+"]: "+ args[i]);
+			logger.info("   ▶args["+i+"]: "+ args[i]);
 		}
 		
 		StopWatch stopwatch = new StopWatch();
@@ -49,7 +45,7 @@ public class AdviceLog {
 		returnObj = pjp.proceed();
 		stopwatch.stop();
 		
-		logger.info("▶Ctrl Return["+stopwatch.getTotalTimeMillis()+"]: "+ returnObj);
+		logger.info("  ▶Ctrl Return["+stopwatch.getTotalTimeMillis()+"]: "+ returnObj);
 		return returnObj;
 //		System.out.println("컨트롤러 모든 메소드가 호출되면 해당메소드(타겟메소드)가 실행되기 "
 //				+ " 전 Before 바로 이 메소드(beforeControllerPointCut)를 실행하고  "

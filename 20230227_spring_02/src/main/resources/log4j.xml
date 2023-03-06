@@ -12,6 +12,7 @@
 		</layout>
 	</appender>
 	<!-- file에 저장하기 -->
+	
 	<!-- Application Loggers -->
 	<logger name="kh.spring.s02">
 		<level value="info" />
