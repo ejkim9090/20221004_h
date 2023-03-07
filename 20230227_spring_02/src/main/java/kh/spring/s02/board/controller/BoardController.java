@@ -2,6 +2,7 @@ package kh.spring.s02.board.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
 
 import kh.spring.s02.board.model.service.BoardService;
 import kh.spring.s02.board.model.vo.BoardVo;
@@ -117,8 +120,13 @@ public class BoardController {
 			) {
 		//TODO
 		String writer = "user22";
+		
 		BoardVo vo = service.selectOne(boardNum, writer);
 		mv.addObject("board", vo);
+		
+		List<BoardVo> replyList = service.selectReplyList(boardNum);
+		mv.addObject("replyList", replyList);
+		
 		mv.setViewName("board/read");
 		return mv;
 	}
@@ -191,8 +199,13 @@ public class BoardController {
 //		vo.setBoardTitle("임시6답제목");
 		vo.setBoardWriter("user22");
 		
+		// 답글 작성
 		service.insert(vo);
-		return "ok";
+		// 연관 답글들 조회해서 ajax로 return해야함.
+		List<BoardVo> replyList = service.selectReplyList(vo.getBoardNum());
+		// ajax는 mv에 실어갈수 없음. //mv.addObject("replyList", replyList);
+		
+		return new Gson().toJson(replyList);
 	}
 	
 //	@RequestMapping(value = "/boardinsert")

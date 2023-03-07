@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +28,28 @@
 		<!-- <button type="reset">초기화</button> -->
 	</fieldset>
 	</form>
-	
+	<hr>
+<h4>댓글</h4>
+<table border="1">
+		<tr>
+			<td>글번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td>조회수</td>
+		</tr>
+	<c:forEach items="${replyList }" var="reply">
+		<!-- 제목을 누르면 글읽기 화면으로 이동 -->
+		<tr>
+			<td>${reply.boardNum }</td>
+			<td><a href="<%=request.getContextPath()%>/board/read?boardNum=${reply.boardNum }">${reply.boardTitle }</a></td>
+			<td>${reply.boardWriter }</td>
+			<td>${reply.boardDate }</td>
+			<td>${reply.boardReadcount }</td>
+		</tr>
+	</c:forEach>
+</table>
+
 <script>
 	$(".btn.reply").on("click", replyClickHandler);
 	
@@ -40,6 +63,7 @@
 			, type: "post"
 			//contentType:
 			, data: $("#frmReply").serialize()   // QueryString // js object
+			, dataType:"json"
 			, success: function(result){
 				console.log(result);
 				//$("#frmReply").eq(0).reset();  // 작성된 글 초기화

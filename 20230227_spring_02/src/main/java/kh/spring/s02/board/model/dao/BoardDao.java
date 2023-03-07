@@ -47,6 +47,12 @@ public class BoardDao {
 	public List<BoardVo> selectList(int currentPage, int limit, String searchWord) {
 		return aa.selectList("boardns.selectListid", searchWord, new RowBounds((currentPage-1)*limit,limit));		
 	}
+	
+	public List<BoardVo> selectReplyList(int boardNum) {
+		return aa.selectList("boardns.selectReplyList", boardNum);
+	}
+	
+	
 	public int selectOneCount() {
 		return aa.selectOne("boardns.selectOneCount");
 	}

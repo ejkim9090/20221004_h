@@ -16,17 +16,6 @@
 	<result column="board_Readcount" property="boardReadcount"/>
 </resultMap>
 
-<resultMap type="bvo" id="rsMap" >
-	<result column="sdate" property="boardDate"/>
-	<result column="board_num" property="boardRef"/>
-</resultMap>
-
-<!--  resultType="bvo" -->
-<select id="tempSelect" resultMap="rsMap">
-	select sysdate as sdate, board_num from board
-</select>
-
-
 <insert id="insertid" parameterType="kh.spring.s02.board.model.vo.BoardVo">
 	insert into board values
 	(
@@ -117,11 +106,34 @@ select BOARD_NUM,BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT
 		</if>
 		</trim>
 </select>
-<!-- 
-<select id="selectListid2">
-	select * from board
+<select id="selectReplyList" resultMap="bvoMap">
+	select * from board 
+		where BOARD_LEVEL > (select BOARD_LEVEL from board where board_Num=#{board_Num} )
+			and BOARD_REF = (select BOARD_REF from board where board_Num=#{board_Num} )
+			and BOARD_REPLY_SEQ > (select BOARD_REPLY_SEQ from board where board_Num=#{board_Num} )
+		order by BOARD_REPLY_SEQ asc
 </select>
- -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 <select id="tempCallableSelect" 
 		statementType="CALLABLE"

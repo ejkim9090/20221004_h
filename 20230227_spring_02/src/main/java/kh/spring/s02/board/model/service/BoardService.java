@@ -19,4 +19,7 @@ public interface BoardService {
 	public List<BoardVo> selectList();  // 전체읽기
 	public List<BoardVo> selectList(int currentPage, int limit);  // paging처리하여 읽기
 	public List<BoardVo> selectList(int currentPage, int limit, String searchWord);  // paging처리+검색하여 읽기
+
+	public List<BoardVo> selectReplyList(int boardNum);  // 글의 답글 전체읽기
+	public List<BoardVo> selectReplyList(int boardNum, int currentPage, int limit);  // 글의 답글 paging처리해서 읽기
 }
