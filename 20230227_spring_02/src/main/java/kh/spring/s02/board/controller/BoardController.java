@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kh.spring.s02.board.model.service.BoardService;
@@ -48,8 +50,6 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		
-		
-		
 		// TODO
 		int currentPage = 2;
 		int totalCnt = service.selectOneCount(searchWord);
@@ -73,8 +73,6 @@ public class BoardController {
 //		mv.addObject("startPage", startPage);
 //		mv.addObject("endPage", endPage);
 //		mv.addObject("currentPage", currentPage);
-		
-
 		
 		mv.addObject("boardlist", service.selectList(currentPage, BOARD_LIMIT, searchWord));
 		mv.setViewName("board/list");
@@ -111,13 +109,18 @@ public class BoardController {
 		int boardNum = 10;
 		int result = service.delete(boardNum);
 	}
-	
+	// 글 상세 읽기 화면
 	@GetMapping("/read")
-	public void viewReadBoard() {
+	public ModelAndView viewReadBoard(
+			ModelAndView mv
+			, @RequestParam("boardNum") int boardNum
+			) {
 		//TODO
-		int boardNum = 1;
 		String writer = "user22";
 		BoardVo vo = service.selectOne(boardNum, writer);
+		mv.addObject("board", vo);
+		mv.setViewName("board/read");
+		return mv;
 	}
 	
 	// 원글 작성페이지 이동
@@ -172,6 +175,24 @@ public class BoardController {
 		service.insert(vo);
 		
 		return mv;
+	}
+	
+	@PostMapping("/insertReplyAjax")
+	@ResponseBody
+	public String insertReplyAjax(
+			BoardVo vo
+			) {
+		System.out.println("######");
+		System.out.println(vo);
+//		int boardNum = 6;
+//		vo.setBoardNum(boardNum);
+//		
+//		vo.setBoardContent("임시6답내용");
+//		vo.setBoardTitle("임시6답제목");
+		vo.setBoardWriter("user22");
+		
+		service.insert(vo);
+		return "ok";
 	}
 	
 //	@RequestMapping(value = "/boardinsert")

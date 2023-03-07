@@ -1,6 +1,7 @@
 package kh.spring.s02.member.model.vo;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 @Component
 public class MemberVo {
@@ -10,6 +11,7 @@ public class MemberVo {
 //	PASSWD NOT NULL VARCHAR2(15) 
 //	NAME   NOT NULL VARCHAR2(20) 
 //	EMAIL           VARCHAR2(30)
+	// 유효성 체크 @Validated  
 	private String id;
 	private String passwd;
 	private String name;

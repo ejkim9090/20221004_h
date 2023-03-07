@@ -88,8 +88,8 @@
 <delete id="deleteid">
 	delete from board where board_Num = #{boardNum}
 </delete>
-<!-- <select id="selectOneid" resultMap="bvoMap"> -->
-<select id="selectOneid" resultType="kh.spring.s02.board.model.vo.BoardVo">
+<select id="selectOneid" resultMap="bvoMap"> 
+<!-- <select id="selectOneid" resultType="kh.spring.s02.board.model.vo.BoardVo"> -->
 	select * from board where board_Num = #{boardNum}
 </select>
 <select id="selectListid" resultMap="bvoMap"> 
