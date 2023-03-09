@@ -1,0 +1,40 @@
+@charset "UTF-8";
+* {
+	box-sizing: border-box;
+}
+header{
+	width: 960px; margin: 0 auto;
+    /* 5. 테두리 - content-box --> border-box 지정 */
+    border: 1px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+section{
+	width: 960px; margin: 0 auto;
+    /* 5. 테두리 - content-box --> border-box 지정 */
+    border: 1px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+aside{
+	
+}
+/* wrap-section{
+	
+}
+wrap-section > menu{
+}
+wrap-section > section{
+}
+wrap-section > aside {
+} */
+footer{
+	width: 960px; margin: 0 auto;
+    /* 5. 테두리 - content-box --> border-box 지정 */
+    border: 1px solid black;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
