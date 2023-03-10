@@ -25,7 +25,6 @@ import kh.spring.s02.board.model.service.BoardService;
 import kh.spring.s02.board.model.vo.BoardVo;
 
 @Controller
-//@WebServlet("/boardinsert")
 @RequestMapping("/board")
 public class BoardController {
 	
@@ -145,7 +144,6 @@ public class BoardController {
 	
 	// 원글 작성 
 //	@PostMapping("/insert")
-	// TODO
 	@GetMapping("/insertPostTest")
 	public ModelAndView doInsertBoard(ModelAndView mv
 			, BoardVo vo
