@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -151,16 +152,20 @@ public class BoardController {
 	
 	// 원글 작성 
 	@PostMapping("/insert")
-	public ModelAndView doInsertBoard(ModelAndView mv
-			, @RequestParam(name = "report", required = false) MultipartFile multi
+	public ModelAndView doInsertBoard(
+			MultipartHttpServletRequest multiReq,
+			@RequestParam(name = "report", required = false) MultipartFile multi
 			, HttpServletRequest request
+			,ModelAndView mv
 			, BoardVo vo
 			) {
-		String renameFilePath;
+		Map<String, String> filePath;
+		List<Map<String, String>> fileListPath;
 		try {
-			renameFilePath = new FileUtil().saveFile(multi, request, null);
-			vo.setBoardOriginalFilename(multi.getOriginalFilename());  // a.png
-			vo.setBoardRenameFilename(renameFilePath);  // resources/fileupload/uuid_a.png
+			fileListPath = new FileUtil().saveFileList(multiReq, request, null);
+			filePath = new FileUtil().saveFile(multi, request, null);
+			vo.setBoardOriginalFilename(filePath.get("original"));
+			vo.setBoardRenameFilename(filePath.get("rename"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

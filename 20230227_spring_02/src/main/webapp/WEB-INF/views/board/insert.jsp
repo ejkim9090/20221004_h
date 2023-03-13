@@ -10,11 +10,11 @@
 	<h1>board insert</h1>
 	<!-- file upload : enctype  -->
 	<form action="insert" method="post" enctype="multipart/form-data" >
-		<input type="text" name="boardTitle" placeholder="力格"><br>
-		<input type="text" name="boardContent" placeholder="郴侩"><br>
-		<!-- file狼 版快 name篮 vo客 促弗 捞抚栏肺 秦具窃. -->
-		<input type="file" name="report" placeholder="梅何颇老"><br>
-		<button type="submit">霸矫臂殿废</button>
+		<input type="text" name="boardTitle" placeholder="鞝滊"><br>
+		<input type="text" name="boardContent" placeholder="雮挫毄"><br>
+		<!-- file upload : multiple 頃橃 鞎婌潓-->
+		<input type="file" name="report" placeholder="觳秬韺岇澕"><br>
+		<button type="submit">瓴岇嫓旮� 霌彪</button>
 	</form>
 </body>
 </html>
