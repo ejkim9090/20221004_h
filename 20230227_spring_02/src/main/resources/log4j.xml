@@ -11,12 +11,26 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+	
+	<appender name="console2"
+		class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %m%n" />
+		</layout>
+	</appender>
 	<!-- file에 저장하기 -->
 	
 	<!-- Application Loggers -->
 	<logger name="kh.spring.s02">
 		<level value="info" />
 	</logger>
+	<logger name="kh.spring.s02.common.AdviceLog">
+		<level value="info" />
+		<appender-ref ref="console2" />
+	</logger>
+	
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -56,6 +70,7 @@
 		<level value="info" />
 		<appender-ref ref="console" />
 	</logger>
+
 
 	<!-- Root Logger -->
 	<root>
