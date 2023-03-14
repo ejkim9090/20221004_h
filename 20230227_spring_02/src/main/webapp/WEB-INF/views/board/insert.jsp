@@ -17,7 +17,7 @@
 		<textarea name="boardContent" placeholder="내용"></textarea><br>
 		<!-- file upload : multiple 하지 않음-->
 		<input type="file" name="report" placeholder="첨부파일"><br>
-		<button type="text" id="btnCheck">textarea값 확인</button>
+		<button type="button" id="btnCheck">textarea값 확인</button>
 		<button type="submit">게시글 등록</button>
 	</form>
 	
@@ -34,8 +34,6 @@
 	  console.log(CKEDITOR.instances.boardContent.getData()); // html태그형태로 textarea의 값을꺼내줌
   });
 </script>
-	
-	
 	
 </body>
 </html>
