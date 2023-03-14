@@ -72,12 +72,14 @@
 		formdata.append("boardContent", $("[name=boardContent]").val());
 		formdata.append("report",  $("[name=report]")[0].files[0]);
 		formdata.append("boardNum", $("[name=boardNum]").val());
-		console.log(formData);
+		console.log(formdata);
 		$.ajax({ 
 			url: "${pageContext.request.contextPath}/board/insertReplyAjax"
 			, type: "post"
 			
 			//, contentType:"multipart/form-data"
+			, contentType: false
+			, processData: false
 			, data: formdata  // QueryString // js object
 			
 			, dataType:"json"   // success에 들어오는 데이터가 json 모양일것이고 이것을 js object 로 변형해서 result에 실어줌.
