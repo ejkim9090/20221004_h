@@ -206,7 +206,13 @@ public class BoardController {
 	@ResponseBody
 	public String insertReplyAjax(
 			BoardVo vo
+			, @RequestParam("report") MultipartFile report
 			) {
+		if(report != null) {
+			System.out.println(report.getOriginalFilename());
+		} else {
+			System.out.println("파일 없음");
+		}
 		System.out.println("######");
 		System.out.println(vo);
 //		int boardNum = 6;

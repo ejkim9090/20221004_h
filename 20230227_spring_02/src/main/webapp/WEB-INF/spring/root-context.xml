@@ -15,14 +15,10 @@
 	<context:property-placeholder location="classpath:properties/khs.properties"/>
 	
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
-		<property name="driverClassName" value="${jdbc.driverName}"/>
-		<property name="url" value="${jdbc.url}"/>
-	<!-- 
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
-	 -->
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
+		<property name="username" value="KH"/>
+		<property name="password" value="KH"/>
 	</bean>
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
